@@ -7,19 +7,17 @@ from api.pagination import CustomPagination
 from api.serializers import BookCategorySerializer, BookSerializer,LibUserSerializer,RentBookSerializer
 #viewsset:list,create,retrieve,update,partial_update,destroy
 
-class BooksViewSet(viewsets.ViewSet):
-    def list(self,request):
+class BooksViewSet(viewsets.ModelViewSet):
         queryset = Book.objects.all()
-        serializers = BookSerializer(queryset,many=True)
-        return Response(serializers.data)
+        serializers_class = BookSerializer
     
     
-    def post(self,request):
-        serializers = BookSerializer(data=request.data)
-        if serializers.is_valid():
-            serializers.save()
-            return Response(serializers.data, status=status.HTTP_201_CREATED)
-        return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+    # def post(self,request):
+    #     serializers = BookSerializer(data=request.data)
+    #     if serializers.is_valid():
+    #         serializers.save()
+    #         return Response(serializers.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
     
     
 
